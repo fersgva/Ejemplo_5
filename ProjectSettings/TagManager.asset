@@ -13,6 +13,7 @@ TagManager:
   - BHException
   - Wood
   - Ground
+  - CuboOro
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - Juego
   - Enemy
   - EnemyPart
-  - 
-  - 
+  - Player
+  - Obstaculo
   - 
   - 
   - 

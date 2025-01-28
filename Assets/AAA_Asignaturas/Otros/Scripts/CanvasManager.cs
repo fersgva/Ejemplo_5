@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanvasManager : MonoBehaviour
+public class CanvasManagerr : MonoBehaviour
 {
     [SerializeField]
     private GameManagerSO gM;
