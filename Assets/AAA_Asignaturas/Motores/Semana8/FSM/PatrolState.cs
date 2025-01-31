@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class PatrolState : State<EnemyController>
 
     private Vector3 destinoActual; //Marca mi destino actual.
 
+    public event Action OnPatrolling;
+
     public override void OnEnterState(EnemyController controller)
     {
         base.OnEnterState(controller);
@@ -28,9 +31,13 @@ public class PatrolState : State<EnemyController>
 
         destinoActual = puntosDeRuta[indicePuntoActual];
         StartCoroutine(PatrullarYEsperar());
+
     }
     public override void OnUpdateState()
     {
+        OnPatrolling?.Invoke();
+
+
         Collider[] collsDetectados = Physics.OverlapSphere(transform.position, controller.RangoVision, controller.QueEsTarget);
         if (collsDetectados.Length > 0) //Hay al menos un target dentro del rango. //1
         {
@@ -40,6 +47,7 @@ public class PatrolState : State<EnemyController>
             {
                 if (Vector3.Angle(transform.forward, direccionATarget) <= controller.AnguloVision / 2)
                 {
+                    controller.Target = collsDetectados[0].transform;
                     controller.ChangeState(controller.ChaseState);
                 }
             }
